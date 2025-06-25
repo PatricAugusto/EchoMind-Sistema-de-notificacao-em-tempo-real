@@ -1,5 +1,5 @@
 // src/context/NotificationContext.jsx
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useRef } from 'react'; // <--- Adicione useRef
 
 const NotificationContext = createContext({
   notifications: [],
@@ -10,20 +10,25 @@ const NotificationContext = createContext({
 
 export const NotificationProvider = ({ children }) => {
   const [notifications, setNotifications] = useState([]);
-  // Adiciona um contador para gerar IDs únicos garantidos
-  const [idCounter, setIdCounter] = useState(0); 
+  // Substitua useState por useRef para o contador de IDs
+  const notificationIdCounter = useRef(0); // <--- Use useRef aqui
 
   const addNotification = (newNotification) => {
-  setNotifications((prevNotifications) => {
-    // Garanta que uniqueId seja uma string simples, como '1750623855807-0'
-    const uniqueId = `${Date.now()}-${idCounter}`; 
-    const notificationToAdd = { ...newNotification, id: uniqueId, read: false };
-    
-    setIdCounter(prevCounter => prevCounter + 1); 
+    setNotifications((prevNotifications) => {
+      // Incrementa o contador do useRef imediatamente
+      notificationIdCounter.current += 1; // <--- Incrementa o valor de .current
 
-    return [notificationToAdd, ...prevNotifications];
-  });
-};
+      // Gera o ID ÚNICO usando o valor ATUALIZADO do useRef
+      const uniqueId = `${Date.now()}-${notificationIdCounter.current}`; 
+
+      const notificationToAdd = { ...newNotification, id: uniqueId, read: false };
+
+      // Opcional: Adicione este console.log para inspecionar os IDs gerados
+      // console.log('Adicionando notificação com ID:', uniqueId, 'e contador:', notificationIdCounter.current); 
+
+      return [notificationToAdd, ...prevNotifications];
+    });
+  };
 
   const markAsRead = (id) => {
     setNotifications((prevNotifications) =>
