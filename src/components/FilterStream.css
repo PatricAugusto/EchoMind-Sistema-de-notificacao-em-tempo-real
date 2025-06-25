@@ -1,0 +1,33 @@
+.filter-stream {
+  display: flex;
+  justify-content: center; /* Centraliza os botões */
+  gap: 10px; /* Espaçamento entre os botões */
+  margin-bottom: 20px; /* Espaço abaixo dos filtros e acima das notificações */
+  flex-wrap: wrap; /* Permite que os botões quebrem linha em telas menores */
+}
+
+.filter-button {
+  background-color: #222; /* Fundo escuro */
+  color: #00ffff; /* Ciano neon */
+  border: 1px solid #00ffff;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase; /* Deixa o texto em maiúsculas */
+  letter-spacing: 0.5px;
+}
+
+.filter-button:hover {
+  background-color: #00ffff;
+  color: #222;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+.filter-button.active {
+  background-color: #00ffff; /* Fundo ciano para o botão ativo */
+  color: #1a1a1a; /* Texto escuro no botão ativo */
+  border-color: #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8); /* Brilho mais forte para o ativo */
+}

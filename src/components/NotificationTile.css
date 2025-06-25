@@ -1,0 +1,172 @@
+.notification-tile {
+  background-color: #1a1a1a; /* Cor de fundo escura */
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  position: relative; /* Necessário para o pseudo-elemento do brilho */
+  overflow: hidden; /* Garante que o brilho não vaze */
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.2); /* Sutil brilho inicial */
+}
+
+.notification-tile.read {
+  opacity: 0.6; /* Notificações lidas ficam mais opacas */
+  box-shadow: none; /* Remove o brilho de pulso */
+  border-color: #222;
+}
+
+.notification-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.notification-icon {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+.notification-title {
+  margin: 0;
+  color: #00ffff; /* Ciano neon */
+  font-size: 1.1em;
+}
+
+.notification-message {
+  color: #bbb;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.notification-footer {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.8em;
+  color: #777;
+}
+
+.notification-category {
+  background-color: #003333; /* Fundo discreto para categoria */
+  color: #00ccff;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* Efeito de Pulso - Base */
+.notification-tile::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 12px; /* Ligeiramente maior que o tile para o brilho */
+  z-index: -1; /* Fica atrás do conteúdo */
+  filter: blur(10px); /* Suaviza o brilho */
+  opacity: 0; /* Começa invisível */
+  transition: opacity 0.5s ease-in-out;
+  animation-iteration-count: infinite; /* Animação contínua */
+  animation-timing-function: ease-in-out;
+}
+
+.notification-footer {
+  display: flex;
+  justify-content: space-between; /* Alinha categoria à esquerda e ações à direita */
+  align-items: center; /* Centraliza verticalmente */
+  font-size: 0.8em;
+  color: #777;
+  margin-top: 10px; /* Adiciona um pequeno espaço acima do rodapé */
+}
+
+.notification-actions {
+  display: flex;
+  gap: 10px; /* Espaço entre os botões */
+}
+
+.action-button {
+  background-color: #004d4d; /* Azul-esverdeado escuro */
+  color: #00ffff; /* Ciano neon */
+  border: 1px solid #00ffff;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #00ffff; /* Inverte as cores no hover */
+  color: #004d4d;
+  border-color: #004d4d;
+}
+
+.action-button.mark-read {
+  background-color: #006666; /* Um pouco mais escuro para diferenciar */
+  border-color: #00ccff;
+  color: #00ccff;
+}
+
+.action-button.mark-read:hover {
+  background-color: #00ccff;
+  color: #006666;
+}
+
+.action-button.remove {
+  background-color: #660000; /* Vermelho escuro para remover */
+  border-color: #ff0055;
+  color: #ff0055; /* Rosa neon */
+}
+
+.action-button.remove:hover {
+  background-color: #ff0055;
+  color: #660000;
+}
+
+/* Cores e Velocidade do Pulso por Urgência */
+
+/* Urgência Alta: Pulso rápido e intenso (vermelho neon) */
+.notification-tile.high::before {
+  background: rgba(255, 0, 100, 0.8); /* Rosa/Vermelho neon */
+  animation-name: pulse-high;
+  animation-duration: 1.5s; /* Pulso mais rápido */
+}
+
+@keyframes pulse-high {
+  0% { opacity: 0; transform: scale(0.95); }
+  50% { opacity: 0.7; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.95); }
+}
+
+/* Urgência Média: Pulso moderado (amarelo/verde neon) */
+.notification-tile.medium::before {
+  background: rgba(255, 255, 0, 0.8); /* Amarelo neon */
+  animation-name: pulse-medium;
+  animation-duration: 2.5s; /* Pulso moderado */
+}
+
+@keyframes pulse-medium {
+  0% { opacity: 0; transform: scale(0.98); }
+  50% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.98); }
+}
+
+/* Urgência Baixa: Pulso suave (azul/verde ciano) */
+.notification-tile.low::before {
+  background: rgba(0, 255, 255, 0.6); /* Ciano neon */
+  animation-name: pulse-low;
+  animation-duration: 3.5s; /* Pulso mais lento e suave */
+}
+
+@keyframes pulse-low {
+  0% { opacity: 0; transform: scale(0.99); }
+  50% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.99); }
+}
+
+/* Interrompe o pulso para notificações lidas */
+.notification-tile.read::before {
+  animation: none; /* Remove a animação de pulso */
+  opacity: 0;
+}

@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Ou uma fonte mais cyberpunk */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #0d0d0d; /* Fundo muito escuro */
+  color: #e0e0e0; /* Cor de texto padrão clara */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinha no topo */
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  max-width: 600px; /* Largura máxima para o painel */
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+h1 {
+  color: #00ffff; /* Ciano neon para o título principal */
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  margin-bottom: 20px;
+}
+
+.notification-panel {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaço entre os tiles */
+}

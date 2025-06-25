@@ -1,0 +1,97 @@
+.urgency-wave-display {
+  width: 100%;
+  height: 80px; /* Altura do display */
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+.urgency-status-text {
+  position: relative;
+  z-index: 2; /* Acima das ondas */
+  color: #00ffff;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.8);
+}
+
+/* Estilos das linhas de onda */
+.wave-line {
+  position: absolute;
+  width: 150%; /* Maior que a largura do container para o movimento */
+  height: 20px;
+  border-radius: 50%;
+  transform: translateX(-50%); /* Centraliza */
+  left: 50%;
+  z-index: 1; /* Abaixo do texto */
+  opacity: 0.3;
+  filter: blur(5px);
+}
+
+.wave-line-1 { bottom: 10%; animation: wave-motion 6s linear infinite; }
+.wave-line-2 { bottom: 30%; animation: wave-motion 7s linear infinite reverse; } /* Inverte a direção */
+.wave-line-3 { bottom: 50%; animation: wave-motion 8s linear infinite; }
+
+@keyframes wave-motion {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  50% { transform: translateX(-55%) rotate(5deg); }
+  100% { transform: translateX(-50%) rotate(0deg); }
+}
+
+/* Cores e velocidade da onda por estado de urgência */
+
+/* Inativo (sem notificações) */
+.urgency-wave-display.inactive {
+  background-color: #111;
+  border-color: #222;
+  box-shadow: none;
+}
+.urgency-wave-display.inactive .wave-line {
+  background-color: rgba(0, 255, 255, 0.1);
+  animation: none; /* Sem animação quando inativo */
+  opacity: 0;
+}
+.urgency-wave-display.inactive .urgency-status-text {
+    color: #777;
+    text-shadow: none;
+}
+
+/* Baixa Atividade */
+.urgency-wave-display.low-activity .wave-line {
+  background-color: rgba(0, 255, 255, 0.4); /* Ciano suave */
+  animation-duration: 8s; /* Mais lento */
+}
+
+/* Atividade Moderada */
+.urgency-wave-display.active .wave-line {
+  background-color: rgba(255, 255, 0, 0.6); /* Amarelo neon */
+  animation-duration: 5s; /* Mais rápido */
+}
+.urgency-wave-display.active .urgency-status-text {
+    color: #ffff00;
+    text-shadow: 0 0 8px rgba(255, 255, 0, 0.8);
+}
+
+/* Crítico */
+.urgency-wave-display.critical {
+  border-color: #ff0055;
+  box-shadow: 0 0 25px rgba(255, 0, 85, 0.8);
+}
+.urgency-wave-display.critical .wave-line {
+  background-color: rgba(255, 0, 85, 0.8); /* Rosa neon */
+  animation-duration: 3s; /* Muito rápido e intenso */
+  filter: blur(8px);
+  opacity: 0.6;
+}
+.urgency-wave-display.critical .urgency-status-text {
+    color: #ff0055;
+    text-shadow: 0 0 10px rgba(255, 0, 85, 1);
+}

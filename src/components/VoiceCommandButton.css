@@ -1,0 +1,73 @@
+.voice-command-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px; /* Espaço acima do botão */
+  margin-bottom: 20px;
+}
+
+.voice-button {
+  background-color: #004d4d; /* Cor base cyberpunk */
+  color: #00ffff; /* Ciano neon */
+  border: 2px solid #00ffff;
+  border-radius: 50%; /* Botão circular */
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5em; /* Tamanho do ícone de microfone */
+  cursor: pointer;
+  position: relative; /* Para as ondas */
+  overflow: hidden; /* Corta as ondas que saem do círculo */
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+}
+
+.voice-button:hover {
+  background-color: #006666;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+}
+
+/* Estilo quando está "ouvindo" */
+.voice-button.listening {
+  background-color: #00ffff; /* Fundo ciano vibrante */
+  color: #1a1a1a; /* Ícone escuro */
+  border-color: #00ffff;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.9), 0 0 40px rgba(0, 255, 255, 0.5); /* Brilho intenso */
+}
+
+/* Animação das Ondas Sonoras */
+.voice-button .wave {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.2); /* Ondas brancas sutis */
+  border-radius: 50%;
+  pointer-events: none; /* Não interfere com o clique */
+  animation: expand-wave 1.5s ease-out forwards; /* Animação de expansão */
+  opacity: 0;
+}
+
+.voice-button .wave-1 { animation-delay: 0s; }
+.voice-button .wave-2 { animation-delay: 0.5s; } /* Ondas com atraso para efeito cascata */
+.voice-button .wave-3 { animation-delay: 1s; }
+
+@keyframes expand-wave {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2); /* Expande a onda para fora do botão */
+    opacity: 0;
+  }
+}
+
+/* Mensagem de Feedback */
+.voice-message {
+  margin-top: 15px;
+  color: #ff0055; /* Rosa neon para feedback */
+  font-size: 1.1em;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(255, 0, 85, 0.6);
+  transition: opacity 0.5s ease;
+}
