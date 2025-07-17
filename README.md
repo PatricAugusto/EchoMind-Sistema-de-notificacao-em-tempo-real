@@ -79,6 +79,7 @@ Saída gerada na pasta dist/ pronta para deploy.
 
 ## 📂 Estrutura do Projeto
 
+```
 echomind/
 ├── public/
 ├── src/
@@ -102,6 +103,7 @@ echomind/
 ├── package.json
 ├── vite.config.js
 └── README.md
+```
 
 ## 🤝 Contribuição
 
